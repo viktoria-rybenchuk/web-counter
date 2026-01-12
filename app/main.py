@@ -1,14 +1,12 @@
-import os
-
 from fastapi import FastAPI
 
-from app.storage import FileStorage, InMemoryStorage
+from app.utills import get_storage
 from app.web_counter import WebCounter
 
 app = FastAPI()
 
 
-storage = FileStorage() if os.getenv('STORAGE_TYPE') == 'FILE' else InMemoryStorage()
+storage = get_storage()
 web_counter = WebCounter(storage)
 
 
@@ -19,4 +17,4 @@ async def increment_counter():
 
 @app.get("/count")
 async def get_counter_value():
-    return {"count": web_counter.get_count()}
+    return {"count": await web_counter.get_count()}

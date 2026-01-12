@@ -32,7 +32,7 @@ async def run_client(client_id, num_requests):
 
 async def send_request(session):
     try:
-        async with session.get(url='http://127.0.0.1:8081/inc') as response:
+        async with session.get(url='http://127.0.0.1:8080/inc') as response:
             return response.status == 200
     except Exception as e:
         logger.error(f"Request failed: {e}")
