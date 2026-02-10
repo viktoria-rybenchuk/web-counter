@@ -32,7 +32,7 @@ async def run_client(client_id, num_requests):
 
 async def send_request(session):
     try:
-        async with session.get(url='http://127.0.0.1:8080/inc') as response:
+        async with session.get(url='http://127.0.0.1:8000/inc') as response:
             return response.status == 200
     except Exception as e:
         logger.error(f"Request failed: {e}")
@@ -53,7 +53,7 @@ async def main(num_clients, requests_per_client):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Load testing client')
-    parser.add_argument('--clients', type=int, default=1, help='Number of clients')
+    parser.add_argument('--clients', type=int, default=10, help='Number of clients')
     parser.add_argument(
         '--requests', type=int, default=10000, help='Requests per client'
     )
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     total_requests = args.clients * args.requests
-    logger.info(f"Storage type {os.getenv('STORAGE_TYPE', 'MEMORY').upper()}")
+    logger.info(f"Storage type {os.getenv('STORAGE_TYPE', 'Hazelcast').upper()}")
     logger.info(
         f"Test: {args.clients} client(s) × {args.requests} requests = {total_requests} total"
     )

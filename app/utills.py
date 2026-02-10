@@ -2,6 +2,7 @@ import os
 
 from app.storage.db_storage import DBStorage
 from app.storage.file_storage import FileStorage
+from app.storage.hazelcast_storage import HZStorage
 from app.storage.in_memory import InMemoryStorage
 
 
@@ -10,7 +11,9 @@ def get_storage():
 
     if storage_type == 'FILE':
         return FileStorage()
-    elif storage_type == 'DB':
+    elif storage_type == 'POSTGRES':
         return DBStorage()
+    elif storage_type == 'HAZELCAST':
+        return HZStorage()
     else:
         return InMemoryStorage()
