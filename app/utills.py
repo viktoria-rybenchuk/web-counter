@@ -1,8 +1,9 @@
 import os
 
-from app.storage.db_storage import DBStorage
+from app.storage.mongo_db import MongoStorage
+from app.storage.postgres_db import DBStorage
 from app.storage.file_storage import FileStorage
-from app.storage.hazelcast_storage import HZStorage
+from app.storage.hazelcast_db import HZStorage
 from app.storage.in_memory import InMemoryStorage
 
 
@@ -15,5 +16,7 @@ def get_storage():
         return DBStorage()
     elif storage_type == 'HAZELCAST':
         return HZStorage()
+    elif storage_type == 'MONGODB':
+        return MongoStorage()
     else:
         return InMemoryStorage()
