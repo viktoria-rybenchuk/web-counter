@@ -1,5 +1,6 @@
 import os
 
+from app.storage.cassandra_db import CassandraStorage
 from app.storage.mongo_db import MongoStorage
 from app.storage.postgres_db import DBStorage
 from app.storage.file_storage import FileStorage
@@ -18,5 +19,7 @@ def get_storage():
         return HZStorage()
     elif storage_type == 'MONGODB':
         return MongoStorage()
+    elif storage_type == 'CASSANDRA':
+        return CassandraStorage()
     else:
         return InMemoryStorage()
